@@ -1,8 +1,7 @@
-
-var request = require('superagent')
+const request = require('superagent')
 
 const get = (url) => {
-    const promise = new Promise((resolve, reject) => {
+    return new Promise((resolve, reject) => {
         request.get(url)
             .end((err, res) => {
                 if (err) {
@@ -13,8 +12,6 @@ const get = (url) => {
                 resolve(res);
             })
     })
-
-    return promise;
 }
 
 module.exports = {

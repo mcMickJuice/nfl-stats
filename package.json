@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "watch": "nodemon src/server.js --watch src"
+    "watch": "nodemon --debug src/server.js --watch src"
   },
   "keywords": [],
   "author": "",

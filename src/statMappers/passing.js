@@ -1,6 +1,10 @@
 const transformStatHtml = require('./htmlMapper')
+const compose = require('../compose')
+const statsToRows = require('./statsToRows')
 
 const statName = 'Passing'
 const statTableName = 'Passing Stats'
 
-module.exports = transformStatHtml(statName, statTableName);
+const mapper = compose(statsToRows(statName), transformStatHtml(statName, statTableName));
+
+module.exports =  mapper;

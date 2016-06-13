@@ -7,6 +7,7 @@ const statRowSelector = 'tr.oddrow, tr.evenrow';
 
 function transFormStatHtml(statName, statTableName) {
     return html => {
+        console.log()
         const $ = cheerio.load(html);
 
         const tableSelector = `:contains("${statTableName}")`;
@@ -51,9 +52,7 @@ function transFormStatHtml(statName, statTableName) {
             }
         })
 
-        return {
-            [statName]: statGroup
-        }
+        return statGroup
     }
 }
 

@@ -1,5 +1,5 @@
-var {get} = require('./httpClient')
-var statMappers = require('./statMappers')
+const {get} = require('./httpClient')
+const statMappers = require('./statMappers')
 
 const requestStats = (playerId, err) => {
     //build Url
