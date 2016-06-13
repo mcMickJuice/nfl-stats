@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "watch": "nodemon src/server.js --watch src"
   },
   "keywords": [],
   "author": "",
@@ -12,11 +12,13 @@
   "dependencies": {
     "cheerio": "^0.20.0",
     "koa": "^1.2.0",
+    "koa-route": "^2.4.2",
     "superagent": "^2.0.0"
   },
   "devDependencies": {
     "ava": "^0.15.2",
-    "babel-register": "^6.9.0"
+    "babel-register": "^6.9.0",
+    "nodemon": "^1.9.2"
   },
   "ava": {}
 }

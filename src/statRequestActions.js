@@ -19,7 +19,11 @@ const requestStats = (playerId, err) => {
         })
         .then(html => {
             //if good request, take body of request and pass through statMappers
-            const stats = statMappers.map(fn => fn(html));
+            const stats = statMappers
+                .map(fn => fn(html))
+                .reduce((acc, next) => {
+                    return Object.assign({}, acc, next);
+                }, {});
 
             return stats;
         })

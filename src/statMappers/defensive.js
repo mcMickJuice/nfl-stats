@@ -1,6 +1,6 @@
 const transformStatHtml = require('./htmlMapper')
 
-const statName = 'Passing'
-const statTableName = 'Passing Stats'
+const statName = 'Defensive'
+const statTableName = 'Defensive'
 
 module.exports = transformStatHtml(statName, statTableName);
