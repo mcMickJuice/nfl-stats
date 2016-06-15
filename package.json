@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "watch": "nodemon --debug src/server.js --watch src",
+    "start": "nodemon --debug src/server.js --watch src",
     "test": "ava --watch"
   },
   "keywords": [],
