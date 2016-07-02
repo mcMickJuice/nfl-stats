@@ -28,6 +28,15 @@ test('will not format calls not to /api', t => {
     t.deepEqual(context.body, originalBody)
 })
 
+test('will not throw if body is undefined', t => {
+    const context = {
+        url: '/api/players',
+        body: undefined
+    }
+
+    t.notThrows(() => runMiddlewareWithContext(middleware, context))
+})
+
 test('format bodies of calls to /api', t => {
     const originalBody = {
         Hey: 'hi',
