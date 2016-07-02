@@ -8,6 +8,12 @@ const app = new Koa();
 
 app.use(jsonFormatter())
 
+app.use(function * (next) {
+    console.log(this.url)
+
+    yield next
+})
+
 app.use(_.get('/api/player', getPlayersByName))
 
 app.use(_.get('/api/stats/:id', getById))
