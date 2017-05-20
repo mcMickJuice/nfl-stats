@@ -8,7 +8,7 @@
     "build:watch": "concurrently \"nodemon --debug --delay 1 dist/server.js --watch dist\" \"babel --watch src -d dist\"",
     "test": "jest",
     "clean": "rimraf dist",
-    "build": "babel src -d dist"
+    "build": "npm run clean&&babel src -d dist"
   },
   "keywords": [],
   "author": "",
