@@ -1,6 +1,3 @@
-const isObject = require('lodash.isobject')
-
-
 const jsonFormatter = (options) => {
     return function * formatterImpl(next) {
         yield next;
@@ -18,7 +15,7 @@ const jsonFormatter = (options) => {
 const camelCaseObjectKeys = obj => {
     return Object.keys(obj).reduce((acc, key) => {
         const val = obj[key];
-        const newKey = camelCaseKey(key);;
+        const newKey = camelCaseKey(key);
 
         return Object.assign({}, acc, {
             [newKey]: val

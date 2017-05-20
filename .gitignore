@@ -41,3 +41,5 @@ jspm_packages
 
 # IDE config
 .vscode
+
+dist/
