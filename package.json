@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "nodemon --debug src/server.js --watch src",
-    "test": "ava --watch"
+    "test": "ava"
   },
   "keywords": [],
   "author": "",
@@ -22,6 +22,7 @@
   "devDependencies": {
     "ava": "^0.15.2",
     "babel-register": "^6.9.0",
+    "jest": "^20.0.3",
     "nodemon": "^1.9.2"
   },
   "ava": {
