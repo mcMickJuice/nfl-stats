@@ -1,4 +1,3 @@
-const isArray = require('lodash.isarray')
 const isObject = require('lodash.isobject')
 
 
@@ -8,7 +7,7 @@ const jsonFormatter = (options) => {
 
         if(!this.url.startsWith('/api') || this.body == null) return;
 
-        if(isArray(this.body)){
+        if(Array.isArray(this.body)){
             this.body = this.body.map(camelCaseObjectKeys);
         } else {
             this.body = camelCaseObjectKeys(this.body);

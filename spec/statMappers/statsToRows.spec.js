@@ -1,5 +1,4 @@
-import test from 'ava';
-import statsToRows from'../../src/statMappers/statsToRows'
+const statsToRows  = require('../../src/statMappers/statsToRows')
 
 const find = (arr, findFunc) => {
     return arr.filter(findFunc)[0];
@@ -21,17 +20,17 @@ const statSet = [
 
 const statName = 'passing';
 
-test('default filter filters out SEASON stattype', t => {
+it('default filter filters out SEASON stattype', () => {
     const functionToTest = statsToRows(statName);
 
     const result = functionToTest(statSet);
     const processedStatSet = result[statName][0].stats;
     
 
-    t.true(Object.keys(processedStatSet).indexOf('season') === -1)
+    expect(Object.keys(processedStatSet).indexOf('season') === -1).toBe(true)
 });
 
-test('filter provided filters out provided stats', t => {
+it('filter provided filters out provided stats', () => {
     const awesomeKeyword = 'awesome'
     const filterOutAwesome = statSet => statSet.statType.toLowerCase() !== awesomeKeyword;
     const functionToTest = statsToRows(statName, filterOutAwesome)
@@ -39,10 +38,10 @@ test('filter provided filters out provided stats', t => {
     const result = functionToTest(statSet);
     const processedStatSet = result[statName][0].stats;
 
-    t.true(Object.keys(processedStatSet).indexOf(awesomeKeyword) === -1)
+    expect(Object.keys(processedStatSet).indexOf(awesomeKeyword) === -1).toBe(true)
 });
 
-test('custom processor processes each statSet', t => {
+it('custom processor processes each statSet', () => {
     const appendToItem = ' test';
     const processor = statSet => Object.assign({}, statSet, {
         statValue: `${statSet.statValue}${appendToItem}`
@@ -54,11 +53,11 @@ test('custom processor processes each statSet', t => {
     const processedStatSet = result[statName][0].stats;
 
     Object.keys(processedStatSet).forEach(key => {
-        t.true(processedStatSet[key].indexOf(appendToItem) > -1)
+        expect(processedStatSet[key].indexOf(appendToItem) > -1).toBe(true)
     })
 });
 
-test('transform {statType, statValue} to key value', t => {
+it('transform {statType, statValue} to key value', () => {
     const functionToTest = statsToRows(statName);
 
     const result = functionToTest(statSet);
@@ -67,14 +66,14 @@ test('transform {statType, statValue} to key value', t => {
     Object.keys(processedStatSet).forEach(key => {
         const item = find(stats, stat => stat.statType.toLowerCase() === key);
 
-        t.deepEqual(item.statValue, processedStatSet[key])
+        expect(item.statValue).toEqual(processedStatSet[key])
     })
 })
 
-test('returns object of key statName', t => {
+it('returns object of key statName', () => {
     const functionToTest = statsToRows(statName);
 
     const result = functionToTest(statSet);
 
-    t.true(Object.keys(result)[0] === statName)
+    expect(Object.keys(result)[0] === statName).toBe(true)
 });

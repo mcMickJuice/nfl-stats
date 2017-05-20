@@ -1,8 +1,7 @@
-const test = require('ava')
 const jsonFormatter = require('../../src/middleware/jsonFormatter')
 
 let middleware;
-test.beforeEach(() => {
+beforeEach(() => {
     middleware = jsonFormatter();
 })
 
@@ -13,7 +12,7 @@ const runMiddlewareWithContext = (middlewareFn, context) => {
     for (var i of genFn) { }
 }
 
-test('will not format calls not to /api', t => {
+it('will not format calls not to /api', () => {
     const originalBody = {
         Hi: 'hey',
         HowAreYa: 'oh hi'
@@ -25,19 +24,19 @@ test('will not format calls not to /api', t => {
 
     runMiddlewareWithContext(middleware, context)
 
-    t.deepEqual(context.body, originalBody)
+    expect(context.body).toEqual(originalBody)
 })
 
-test('will not throw if body is undefined', t => {
+it('will not throw if body is undefined', () => {
     const context = {
         url: '/api/players',
         body: undefined
     }
 
-    t.notThrows(() => runMiddlewareWithContext(middleware, context))
+    expect(() => runMiddlewareWithContext(middleware, context)).not.toThrow()
 })
 
-test('format bodies of calls to /api', t => {
+it('format bodies of calls to /api', () => {
     const originalBody = {
         Hey: 'hi',
         Hi: 'hey',
@@ -53,10 +52,10 @@ test('format bodies of calls to /api', t => {
 
     runMiddlewareWithContext(middleware, context)
 
-    t.not(originalBody, context.body)
+    expect(originalBody).not.toBe(context.body)
 })
 
-test('camelCase keys of response body', t => {
+it('camelCase keys of response body', () => {
     const originalBody = {
         Hey: 'hi',
         Hi: 'hey',
@@ -73,11 +72,11 @@ test('camelCase keys of response body', t => {
     runMiddlewareWithContext(middleware, context)
 
     Object.keys(context.body).forEach(key => {
-        t.true(originalBodyKeys.indexOf(key) > -1)
+        expect(originalBodyKeys.indexOf(key) > -1).toBe(true)
     })
 })
 
-test('camelCase keys of response body if array', t => {
+it('camelCase keys of response body if array', () => {
     const originalBody = {
         Hey: 'hi',
         Hi: 'hey',
@@ -94,11 +93,11 @@ test('camelCase keys of response body if array', t => {
     runMiddlewareWithContext(middleware, context)
 
     context.body.forEach(obj => Object.keys(obj).forEach(key => {
-        t.true(originalBodyKeys.indexOf(key) > -1)
+        expect(originalBodyKeys.indexOf(key) > -1).toBe(true)
     }))
 })
 
-test('doesnt alter existing camelCased body', t => {
+it('doesnt alter existing camelCased body', () => {
     const originalBody = {
         hey: 'hi',
         hi: 'hey',
@@ -113,5 +112,5 @@ test('doesnt alter existing camelCased body', t => {
 
     runMiddlewareWithContext(middleware, context);
 
-    t.deepEqual(originalBody, context.body)
+    expect(originalBody).toEqual(context.body)
 })
