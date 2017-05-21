@@ -8,12 +8,14 @@
     "build:watch": "concurrently \"nodemon --debug --delay 1 dist/server.js --watch dist\" \"babel --watch src -d dist\"",
     "test": "jest",
     "clean": "rimraf dist",
-    "build": "npm run clean&&babel src -d dist"
+    "build": "npm run clean&&babel src -d dist",
+    "babel-node": "babel-node"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "babel-node": "^6.5.3",
     "cheerio": "^0.20.0",
     "koa": "^1.2.0",
     "koa-route": "^2.4.2",
