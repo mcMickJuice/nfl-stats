@@ -5,11 +5,11 @@ const scoring = require('./scoring')
 const defensive = require('./defensive')
 
 const mappers = [
-    passing,
-    rushing,
-    receiving,
-    scoring,
-    defensive
-] 
+  passing,
+  rushing,
+  receiving,
+  scoring,
+  defensive
+]
 
 module.exports = mappers
