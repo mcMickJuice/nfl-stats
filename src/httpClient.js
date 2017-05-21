@@ -1,6 +1,6 @@
 const request = require('superagent')
 
-const get = (url) => {
+module.exports.get = (url) => {
   return new Promise((resolve, reject) => {
     request.get(url)
       .end((err, res) => {
@@ -12,8 +12,4 @@ const get = (url) => {
         resolve(res);
       })
   })
-}
-
-module.exports = {
-  get
 }

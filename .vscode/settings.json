@@ -2,6 +2,7 @@
 {
   "eslint.enable": true,
   "javascript.validate.enable": false,
+  "flow.enabled": true,
   "flow.useNPMPackagedFlow": true,
   "flow.pathToFlow": "./node_modules/.bin/flow",
   "files.exclude": {
@@ -12,5 +13,6 @@
     "**/.DS_Store": true,
     "**/dist":true
   },
-  "editor.detectIndentation": false
+  "editor.detectIndentation": false,
+  "editor.tabSize": 2
 }
