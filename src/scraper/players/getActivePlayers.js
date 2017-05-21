@@ -1,9 +1,6 @@
 // @flow
 const { get } = require('../../httpClient')
-const { scrapePlayersFromTeamTable } = require('./playerScraper')
-
-//purpose: makes request to ESPN.com for each team,
-//maps html to player rows
+const { scrapePlayersFromTeamRoster } = require('./rosterScraper')
 
 export type Team = {
   teamKey: string,
@@ -148,16 +145,15 @@ const teams: Team[] = [
 
 const rosterUrl = (key: string) => `http://www.espn.com/nfl/team/roster/_/name/${key}/sort/lastName`;
 
-module.exports.getCurrentPlayers = (): Promise<RosterPlayer[]> => {
+module.exports.getPlayersFromRosters = (): Promise<RosterPlayer[]> => {
   const teamTasks = teams.map(team => {
     const url = rosterUrl(team.teamKey);
     return get(url)
       .then(res => res.text)
       .then(html => {
-        return scrapePlayersFromTeamTable(html, team.name);
+        return scrapePlayersFromTeamRoster(html, team.name);
       })
   })
-
 
   return Promise.all(teamTasks)
     .then(rostersByTeam => {

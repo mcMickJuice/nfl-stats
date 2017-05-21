@@ -1,10 +1,10 @@
 // @flow
-const { getCurrentPlayers } = require('../scraper/players/getPlayersForTeams')
+const { getPlayersFromRosters } = require('../scraper/players/getActivePlayers')
 const fs = require('fs')
 const path = require('path')
 
 module.exports = (outputDir: string) => {
-  return getCurrentPlayers()
+  return getPlayersFromRosters()
     .then((players: RosterPlayer[]) => {
 
       const fileName = path.join(outputDir, 'players.json')
