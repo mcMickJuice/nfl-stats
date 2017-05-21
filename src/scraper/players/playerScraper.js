@@ -25,7 +25,7 @@ const extractContentsFromTdByIndex = ($context, row, index) => {
   return td;
 }
 
-const map: (($context: any, row: any, obj: RosterPlayer) => void)[] = [
+const map: (($context: any, row: any, obj: Object) => void)[] = [
   ($context, row, obj) => {
     //name and id
     const td = extractContentsFromTdByIndex($context, row, tableIndex.name);
@@ -53,8 +53,8 @@ const map: (($context: any, row: any, obj: RosterPlayer) => void)[] = [
   },
 ]
 
-const processRow: ($context: any, row: any) => RosterPlayer = ($context, row) => {
-  const player: RosterPlayer = {};
+const processRow: ($context: any, row: any) => Object = ($context, row) => {
+  const player = {};
 
   //go through mapping and pass in current row and player object
   map.forEach(m => {

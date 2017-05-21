@@ -13,7 +13,7 @@ module.exports = (searchTerm: string): Promise<RosterPlayer[]> => {
         const players = JSON.parse(data);
         const searchTermLowerCase = searchTerm.toLowerCase();
         const foundPlayers = players.filter((p: RosterPlayer) => {
-          return (p.name || '').toLowerCase().indexOf(searchTermLowerCase) > -1
+          return p.name.toLowerCase().indexOf(searchTermLowerCase) > -1
         })
 
         resolve(foundPlayers)
