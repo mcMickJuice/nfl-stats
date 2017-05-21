@@ -1,9 +1,8 @@
 const Koa = require('koa');
 const _ = require('koa-route')
 const { requestStats } = require('./statRequestActions')
-const { searchPlayer } = require('./playerQueries')
 const jsonFormatter = require('./middleware/jsonFormatter')
-const { getCurrentPlayers } = require('./scraper/players/getPlayersForTeams')
+const searchPlayers = require('./scraper/players/searchPlayers')
 
 const app = new Koa();
 
@@ -19,16 +18,14 @@ app.use(_.get('/api/player', getPlayersByName))
 
 app.use(_.get('/api/stats/:id', getById))
 
-app.use(_.get('/api/players/all', getPlayers))
-
 const port = process.env.PORT || 5000;
 app.listen(port, () => {
   console.log(`listening on port ${port}`)
 });
 
 function* getPlayersByName(query) {
-  const { playerName } = this.query
-  const records = yield searchPlayer(playerName);
+  const { searchTerm } = this.query
+  const records = yield searchPlayers(searchTerm);
 
   this.body = records;
 }
@@ -45,11 +42,4 @@ function* getById(id) {
   });
 
   this.body = stats;
-}
-
-
-function* getPlayers() {
-  const players = yield getCurrentPlayers();
-
-  this.body = players;
 }
