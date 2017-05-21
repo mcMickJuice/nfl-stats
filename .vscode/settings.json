@@ -1,0 +1,16 @@
+// Place your settings in this file to overwrite default and user settings.
+{
+  "eslint.enable": true,
+  "javascript.validate.enable": false,
+  "flow.useNPMPackagedFlow": true,
+  "flow.pathToFlow": "./node_modules/.bin/flow",
+  "files.exclude": {
+    "**/.git": true,
+    "**/.svn": true,
+    "**/.hg": true,
+    "**/CVS": true,
+    "**/.DS_Store": true,
+    "**/dist":true
+  },
+  "editor.detectIndentation": false
+}
