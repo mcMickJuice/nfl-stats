@@ -1,8 +1,8 @@
 // @flow
 
-const { getFromCache } = require('../../cacheService')
+const { getFromCache } = require('../cacheService')
 
-module.exports = (searchTerm: string): Promise<RosterPlayer[]> => {
+module.exports.searchPlayers = (searchTerm: string): Promise<RosterPlayer[]> => {
   return new Promise((resolve) => {
     getFromCache('players').then((players: RosterPlayer[]) => {
       const searchTermLowerCase = searchTerm.toLowerCase();
