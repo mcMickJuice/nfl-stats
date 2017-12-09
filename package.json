@@ -9,14 +9,13 @@
     "test": "jest",
     "clean": "rimraf dist",
     "build": "npm run clean&&babel src -d dist",
-    "babel-node": "babel-node",
+    "babel-node": "babel-node ./src/server.js",
     "flow": "flow"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "babel-node": "^6.5.3",
     "cheerio": "^0.20.0",
     "koa": "^1.2.0",
     "koa-route": "^2.4.2",
