@@ -3,6 +3,8 @@
 const fs = require('fs')
 const path = require('path')
 
+// in memory stub for searching players. eventually this will come from a 
+// database, not a loca json file :)
 module.exports = (searchTerm: string): Promise<RosterPlayer[]> => {
   const filePath = path.resolve(__dirname, '../../../output/players.json')
   return new Promise((resolve, reject) => {
