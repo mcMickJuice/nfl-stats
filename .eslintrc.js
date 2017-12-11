@@ -1,31 +1,29 @@
 module.exports = {
-    "env": {
-        "es6": true,
-        "node": true,
-        "jest/globals": true
-    },
-    "plugins": [
-        "flowtype",
-        "jest"
+  "env": {
+    "es6": true,
+    "node": true,
+    "jest/globals": true
+  },
+  "plugins": [
+    "flowtype",
+    "jest",
+    "prettier"
+  ],
+  "extends": ["eslint:recommended", "plugin:flowtype/recommended"],
+  "rules": {
+    "indent": [
+      "error",
+      2
     ],
-    "extends": ["eslint:recommended", "plugin:flowtype/recommended"],
-    "rules": {
-        "indent": [
-            "error",
-            2
-        ],
-        "linebreak-style": [
-            "error",
-            "windows"
-        ],
-        "quotes": [
-            "error",
-            "single"
-        ]
-    },
-    "settings": {
-        "flowtype": {
-            "onlyFilesWithFlowAnnotation": true
-        }
+    "quotes": [
+      "error",
+      "single"
+    ],
+    "prettier/prettier": "error"
+  },
+  "settings": {
+    "flowtype": {
+      "onlyFilesWithFlowAnnotation": true
     }
+  }
 };

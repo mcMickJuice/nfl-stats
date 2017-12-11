@@ -10,7 +10,8 @@
     "clean": "rimraf dist",
     "build": "npm run clean&&babel src -d dist",
     "babel-node": "babel-node ./src/server.js",
-    "flow": "flow"
+    "flow": "flow",
+    "lint": "eslint ./src"
   },
   "keywords": [],
   "author": "",
@@ -32,9 +33,11 @@
     "eslint": "^3.19.0",
     "eslint-plugin-flowtype": "^2.33.0",
     "eslint-plugin-jest": "^20.0.3",
+    "eslint-plugin-prettier": "^2.3.1",
     "flow-bin": "^0.46.0",
     "jest": "^21.2.1",
     "nodemon": "^1.9.2",
+    "prettier": "^1.9.1",
     "rimraf": "^2.6.1"
   }
 }
