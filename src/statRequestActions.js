@@ -1,7 +1,7 @@
 const { get } = require('./httpClient')
 const statMappers = require('./statMappers')
 
-const requestStats = (playerId, err) => {
+const requestStats = playerId => {
   //build Url
   const url = `http://espn.go.com/nfl/player/stats/_/id/${playerId}`
 

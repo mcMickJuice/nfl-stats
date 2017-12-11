@@ -1,17 +1,17 @@
-const seasonStatsToRows = seasonStats => {
-  const { season, stats } = seasonStats
-  const rows = stats.reduce((acc, next) => {
-    const statType = next.statType.toLowerCase()
-    return Object.assign(acc, {
-      [statType]: next.statValue
-    })
-  }, {})
+// const seasonStatsToRows = seasonStats => {
+//   const { season, stats } = seasonStats
+//   const rows = stats.reduce((acc, next) => {
+//     const statType = next.statType.toLowerCase()
+//     return Object.assign(acc, {
+//       [statType]: next.statValue
+//     })
+//   }, {})
 
-  return {
-    season,
-    stats: rows
-  }
-}
+//   return {
+//     season,
+//     stats: rows
+//   }
+// }
 
 const processStats = (filter, processor) => {
   return seasonStats => {

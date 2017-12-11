@@ -9,8 +9,10 @@ const runMiddlewareWithContext = (middlewareFn, context) => {
   middlewareFn = middlewareFn.bind(context)
   const genFn = middlewareFn()
   //run to completion
+  /* eslint-disable  */
   for (var i of genFn) {
   }
+  /* eslint-enable */
 }
 
 it('will not format calls not to /api', () => {
@@ -43,8 +45,6 @@ it('format bodies of calls to /api', () => {
     Hi: 'hey',
     HowAreYa: 'howareya'
   }
-
-  const originalBodyKeys = ['hey', 'hi', 'howAreYa']
 
   const context = {
     url: '/api/players',

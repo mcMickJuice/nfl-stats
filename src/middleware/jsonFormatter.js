@@ -1,4 +1,4 @@
-const jsonFormatter = options => {
+const jsonFormatter = () => {
   return function* formatterImpl(next) {
     yield next
 
