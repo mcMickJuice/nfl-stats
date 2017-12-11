@@ -1,43 +1,46 @@
-const cheerio = require('cheerio');
+const cheerio = require('cheerio')
 
-const cellSelector = 'td';
+const cellSelector = 'td'
 const statTablesSelector = '.mod-player-stats table'
 const colHeadSelector = 'tr.colhead'
-const statRowSelector = 'tr.oddrow, tr.evenrow';
+const statRowSelector = 'tr.oddrow, tr.evenrow'
 
 function transFormStatHtml(statName, statTableName) {
   return html => {
-    const $ = cheerio.load(html);
+    const $ = cheerio.load(html)
 
-    const tableSelector = `:contains("${statTableName}")`;
+    const tableSelector = `:contains("${statTableName}")`
 
-    const statTable = $(`${statTablesSelector}${tableSelector}`);
+    const statTable = $(`${statTablesSelector}${tableSelector}`)
 
     //grab stat headers and values
     let headerValues = []
     $(colHeadSelector, statTable).each((idx, elem) => {
-      const headers = $(cellSelector, elem).map((idx, cell) => {
-        return $(cell).text()
-      }).get()
+      const headers = $(cellSelector, elem)
+        .map((idx, cell) => {
+          return $(cell).text()
+        })
+        .get()
       headerValues = headers
     })
 
     //sanitize headers
 
     //grab stat rows and values
-    const statsBySeason = [];
+    const statsBySeason = []
     $(statRowSelector, statTable).each((idx, elem) => {
+      const stats = $(cellSelector, elem)
+        .map((idx, cell) => {
+          return $(cell).text()
+        })
+        .get()
 
-      const stats = $(cellSelector, elem).map((idx, cell) => {
-        return $(cell).text()
-      }).get()
-
-      statsBySeason.push(stats);
+      statsBySeason.push(stats)
     })
 
     //zip headers with each stat row
     const statGroup = statsBySeason.map(seasonStat => {
-      const season = seasonStat[0];
+      const season = seasonStat[0]
       const stats = seasonStat.map((stat, idx) => {
         return {
           statType: headerValues[idx],

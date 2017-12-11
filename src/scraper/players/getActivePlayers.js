@@ -139,26 +139,25 @@ const teams: Team[] = [
   {
     teamKey: 'ten',
     name: 'Tennessee Titans'
-  },
-
+  }
 ]
 
-const rosterUrl = (key: string) => `http://www.espn.com/nfl/team/roster/_/name/${key}/sort/lastName`;
+const rosterUrl = (key: string) =>
+  `http://www.espn.com/nfl/team/roster/_/name/${key}/sort/lastName`
 
 module.exports.getPlayersFromRosters = (): Promise<RosterPlayer[]> => {
   const teamTasks = teams.map(team => {
-    const url = rosterUrl(team.teamKey);
+    const url = rosterUrl(team.teamKey)
     return get(url)
       .then(res => res.text)
       .then(html => {
-        return scrapePlayersFromTeamRoster(html, team.name);
+        return scrapePlayersFromTeamRoster(html, team.name)
       })
   })
 
-  return Promise.all(teamTasks)
-    .then(rostersByTeam => {
-      return rostersByTeam.reduce((acc, next) => {
-        return [...acc, ...next];
-      })
+  return Promise.all(teamTasks).then(rostersByTeam => {
+    return rostersByTeam.reduce((acc, next) => {
+      return [...acc, ...next]
     })
+  })
 }

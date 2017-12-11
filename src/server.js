@@ -1,6 +1,6 @@
 /* eslint-disable no-console */
 
-const Koa = require('koa');
+const Koa = require('koa')
 const _ = require('koa-route')
 const { requestStats } = require('./statRequestActions')
 const jsonFormatter = require('./middleware/jsonFormatter')
@@ -10,7 +10,7 @@ const { getPlayersFromRosters } = require('./scraper/players/getActivePlayers')
 const { teams } = require('./constant.js')
 const { getRosterForTeam } = require('./service/teams')
 
-const app = new Koa();
+const app = new Koa()
 
 app.use(jsonFormatter())
 
@@ -20,7 +20,7 @@ app.use(jsonFormatter())
 //   yield next
 // })
 
-app.use(function* (next) {
+app.use(function*(next) {
   const playerKey = 'players'
   const doPlayersExists = yield existsInCache(playerKey)
 
@@ -39,11 +39,10 @@ app.use(_.get('/api/team/:team', getTeamRoster))
 
 app.use(_.get('/api/stats/:id', getById))
 
-const port = process.env.PORT || 5000;
+const port = process.env.PORT || 5000
 app.listen(port, () => {
   console.log(`listening on port ${port}`)
-
-});
+})
 
 function* getTeamRoster(team) {
   const lowerCase = team.toLowerCase()
@@ -61,13 +60,13 @@ function* getTeamRoster(team) {
 
 function* getPlayersByName() {
   const { searchTerm } = this.query
-  const records = yield searchPlayers(searchTerm);
+  const records = yield searchPlayers(searchTerm)
 
-  this.body = records;
+  this.body = records
 }
 
 function* getById(id) {
-  const _id = Number(id);
+  const _id = Number(id)
 
   if (isNaN(_id)) {
     this.throw(`Value provided is not a Number ${id}`, 400)
@@ -75,7 +74,7 @@ function* getById(id) {
 
   const stats = yield requestStats(_id, () => {
     console.log('an error occurred')
-  });
+  })
 
-  this.body = stats;
+  this.body = stats
 }

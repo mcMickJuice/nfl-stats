@@ -1,4 +1,4 @@
-const dbClient = require('./dbClient');
+const dbClient = require('./dbClient')
 
 const searchPlayer = playerName => {
   //TODO santize this query!
@@ -6,7 +6,7 @@ const searchPlayer = playerName => {
                     FROM Players
                     WHERE PlayerName LIKE '${playerName}%'`
 
-  return dbClient.query(query);
+  return dbClient.query(query)
 }
 
 module.exports = {

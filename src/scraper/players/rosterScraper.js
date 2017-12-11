@@ -8,28 +8,28 @@ const tableIndex = {
 }
 
 const extractContentsFromTdByIndex = ($context, row, index) => {
-  const td = $context('td', row)[index];
+  const td = $context('td', row)[index]
 
-  return td;
+  return td
 }
 
-export type RosterPlayerMapper = ($context: any, row: any, obj: Object) => void;
+export type RosterPlayerMapper = ($context: any, row: any, obj: Object) => void
 
 const nameAndIdMapper: RosterPlayerMapper = ($context, row, obj) => {
-  const td = extractContentsFromTdByIndex($context, row, tableIndex.name);
+  const td = extractContentsFromTdByIndex($context, row, tableIndex.name)
 
   const $anchor = $context('a', td)
 
   //http://www.espn.com/nfl/player/_/id/2515345/richard-ash
   const href = $anchor.attr('href')
   const pattern = /\/id\/(\d+)\//
-  const id = href.match(pattern)[1];
+  const id = href.match(pattern)[1]
   obj.id = Number(id)
-  obj.name = $anchor.text();
+  obj.name = $anchor.text()
 }
 
 const positionMapper: RosterPlayerMapper = ($context, row, obj) => {
-  const td = extractContentsFromTdByIndex($context, row, tableIndex.position);
+  const td = extractContentsFromTdByIndex($context, row, tableIndex.position)
 
   obj.position = $context(td).text()
 }
@@ -47,7 +47,7 @@ const rosterPlayerMappers: RosterPlayerMapper[] = [
 ]
 
 const processRow: ($context: any, row: any) => Object = ($context, row) => {
-  const player = {};
+  const player = {}
 
   rosterPlayerMappers.forEach(mappers => {
     mappers($context, row, player)
@@ -56,19 +56,22 @@ const processRow: ($context: any, row: any) => Object = ($context, row) => {
   return player
 }
 
-module.exports.scrapePlayersFromTeamRoster = (html: string, team: string): RosterPlayer[] => {
-  const $ = cheerio.load(html);
-  const tableRowSelector = '#my-players-table table tr';
+module.exports.scrapePlayersFromTeamRoster = (
+  html: string,
+  team: string
+): RosterPlayer[] => {
+  const $ = cheerio.load(html)
+  const tableRowSelector = '#my-players-table table tr'
 
   //table has two extra headers
-  const tableRows = $(tableRowSelector).not('.stathead,.colhead');
+  const tableRows = $(tableRowSelector).not('.stathead,.colhead')
 
-  let players: RosterPlayer[] = [];
+  let players: RosterPlayer[] = []
   tableRows.each((idx, row) => {
-    const player = processRow($, row);
-    player.team = team;
+    const player = processRow($, row)
+    player.team = team
     players.push(player)
   })
 
-  return players;
+  return players
 }

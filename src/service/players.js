@@ -2,10 +2,12 @@
 
 const { getFromCache } = require('../cacheService')
 
-module.exports.searchPlayers = (searchTerm: string): Promise<RosterPlayer[]> => {
-  return new Promise((resolve) => {
+module.exports.searchPlayers = (
+  searchTerm: string
+): Promise<RosterPlayer[]> => {
+  return new Promise(resolve => {
     getFromCache('players').then((players: RosterPlayer[]) => {
-      const searchTermLowerCase = searchTerm.toLowerCase();
+      const searchTermLowerCase = searchTerm.toLowerCase()
       const foundPlayers = players.filter((p: RosterPlayer) => {
         return p.name.toLowerCase().indexOf(searchTermLowerCase) > -1
       })

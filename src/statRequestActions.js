@@ -7,25 +7,25 @@ const requestStats = (playerId, err) => {
 
   //make stat requestStats
   return get(url)
-    .then(res => res.text
-    , err => {
-      //if bad request, return unsuccessful request type
-      const errObject = {
-        message: `Error Requesting Html - ${url}`,
-        error: err
-      }
+    .then(
+      res => res.text,
+      err => {
+        //if bad request, return unsuccessful request type
+        const errObject = {
+          message: `Error Requesting Html - ${url}`,
+          error: err
+        }
 
-      return new Error(errObject);
-    })
+        return new Error(errObject)
+      }
+    )
     .then(html => {
       //if good request, take body of request and pass through statMappers
-      const stats = statMappers
-        .map(fn => fn(html))
-        .reduce((acc, next) => {
-          return Object.assign({}, acc, next);
-        }, {});
+      const stats = statMappers.map(fn => fn(html)).reduce((acc, next) => {
+        return Object.assign({}, acc, next)
+      }, {})
 
-      return stats;
+      return stats
     })
 }
 

@@ -5,8 +5,6 @@ export type Team = {
   name: string
 }
 
-
-
 const teams: Team[] = [
   {
     teamKey: 'dal',
@@ -139,8 +137,7 @@ const teams: Team[] = [
   {
     teamKey: 'ten',
     name: 'Tennessee Titans'
-  },
-
+  }
 ]
 
 module.exports.teams = teams
