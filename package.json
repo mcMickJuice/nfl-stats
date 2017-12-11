@@ -11,7 +11,7 @@
     "build": "npm run clean&&babel src -d dist",
     "babel-node": "babel-node ./src/server.js",
     "flow": "flow",
-    "lint": "eslint ./src"
+    "lint": "eslint ."
   },
   "keywords": [],
   "author": "",
