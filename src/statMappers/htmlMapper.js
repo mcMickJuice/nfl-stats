@@ -1,3 +1,4 @@
+// @flow
 const cheerio = require('cheerio')
 
 const cellSelector = 'td'
@@ -5,8 +6,10 @@ const statTablesSelector = '.mod-player-stats table'
 const colHeadSelector = 'tr.colhead'
 const statRowSelector = 'tr.oddrow, tr.evenrow'
 
-function transFormStatHtml(statName, statTableName) {
-  return html => {
+function buildTransformSeasonStatHtml(
+  statTableName: string
+): (html: string) => any {
+  return (html: string): any => {
     const $ = cheerio.load(html)
 
     const tableSelector = `:contains("${statTableName}")`
@@ -58,4 +61,4 @@ function transFormStatHtml(statName, statTableName) {
   }
 }
 
-module.exports = transFormStatHtml
+module.exports = buildTransformSeasonStatHtml
