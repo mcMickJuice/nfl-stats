@@ -1,5 +1,5 @@
 // @flow
-import type { Team } from '../scraper/players/getActivePlayers'
+import type { Team } from '../constant'
 
 const { getFromCache } = require('../cacheService')
 
