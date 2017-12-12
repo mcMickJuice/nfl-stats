@@ -2,6 +2,9 @@
 
 // http://www.espn.com/nfl/player/stats/_/id/8439/aaron-rodgers
 
+/* eslint-disable */
+
+// TODO: eventually type the responses coming back from players/getPlayerStatsBySeason
 type SeasonStatBase = {
   season: number,
   teamId: string,

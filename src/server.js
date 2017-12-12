@@ -2,9 +2,8 @@
 
 const Koa = require('koa')
 const _ = require('koa-route')
-const { requestStats } = require('./statRequestActions')
 const jsonFormatter = require('./middleware/jsonFormatter')
-const { searchPlayers } = require('./service/players')
+const { searchPlayers, getPlayerStatsBySeason } = require('./service/players')
 const { existsInCache, addToCache } = require('./cacheService')
 const { getPlayersFromRosters } = require('./scraper/players/getActivePlayers')
 const { teams } = require('./constant.js')
@@ -13,12 +12,6 @@ const { getRosterForTeam } = require('./service/teams')
 const app = new Koa()
 
 app.use(jsonFormatter())
-
-// app.use(function* (next) {
-//   console.log(this.url)
-
-//   yield next
-// })
 
 app.use(function*(next) {
   const playerKey = 'players'
@@ -33,11 +26,11 @@ app.use(function*(next) {
   yield next
 })
 
-app.use(_.get('/api/player', getPlayersByName))
+app.use(_.get('/api/players', getPlayersByName))
 
-app.use(_.get('/api/team/:team', getTeamRoster))
+app.use(_.get('/api/players/:id/stats', getById))
 
-app.use(_.get('/api/stats/:id', getById))
+app.use(_.get('/api/teams/:team', getTeamRoster))
 
 const port = process.env.PORT || 5000
 app.listen(port, () => {
@@ -72,7 +65,7 @@ function* getById(id) {
     this.throw(`Value provided is not a Number ${id}`, 400)
   }
 
-  const stats = yield requestStats(_id, () => {
+  const stats = yield getPlayerStatsBySeason(_id, () => {
     console.log('an error occurred')
   })
 

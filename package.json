@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "start": "npm run build&&npm run build:watch",
-    "build:watch": "concurrently \"nodemon --debug --delay 1 dist/server.js --watch dist\" \"babel --watch src -d dist\"",
+    "build:watch":
+      "concurrently \"nodemon --inspect --delay 3 dist/server.js --watch dist\" \"babel --watch src -d dist\"",
     "test": "jest",
     "clean": "rimraf dist",
     "build": "npm run clean&&babel src -d dist",
